@@ -28,11 +28,11 @@ def stats(update, context):
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
-    sent = get_readable_file_size(net_io_counters().bytes_sent)
-    recv = get_readable_file_size(net_io_counters().bytes_recv)
-    cpuUsage = cpu_percent(interval=1)
-    memory = virtual_memory()
-    mem_p = memory.percent
+    sent = get_readable_file_size(psutil.net_io_counters().bytes_sent)
+    recv = get_readable_file_size(psutil.net_io_counters().bytes_recv)
+    cpuUsage = psutil.cpu_percent(interval=0.5)
+    memory = psutil.virtual_memory().percent
+    disk = psutil.disk_usage('/').percent
     stats = f'<b>Bot Uptime:</b> <code>{currentTime}</code>\n' \
             f'<b>Total Disk Space:</b> <code>{total}</code>\n' \
             f'<b>Used:</b> <code>{used}</code> ' \
