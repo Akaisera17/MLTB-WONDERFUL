@@ -24,8 +24,8 @@ def stats(update, context):
         last_commit = check_output(["git log -1 --date=short --pretty=format:'%cr <b>On</b> %cd'"], shell=True).decode()
     else:
         last_commit = 'No UPSTREAM_REPO'
-    currentTime = get_readable_time(time() - botStartTime)
-    total, used, free, disk= disk_usage('/')
+    currentTime = get_readable_time(time.time() - botStartTime)
+    total, used, free = shutil.disk_usage('.')
     total = get_readable_file_size(total)
     used = get_readable_file_size(used)
     free = get_readable_file_size(free)
